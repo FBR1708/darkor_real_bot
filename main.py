@@ -4,7 +4,6 @@ from aiogram.types import ContentTypes
 from aiogram.utils.exceptions import MessageToDeleteNotFound, BadRequest
 
 from Token import db, bot
-from database import Base, engine, Session
 from english.keyboard_eng import services_type_eng, inline_keyboard_eng
 from english.user_info_eng import services_start_eng, advertisement_start_eng, send_admin_advertisement_employee_eng, \
     send_admin_advertisement_employer_eng, send_admin_employee_eng, send_admin_HR_employer_eng, \
@@ -67,8 +66,6 @@ from uzb.user_info_uzb import services_start, user_info_start, user_name, user_y
     advertisement_employee_phone_number1, advertisement_employee_comment, back_func, \
     send_channel_advertisement_employee, send_admin_advertisement_employer, send_admin_advertisement_employee
 
-Base.metadata.create_all(engine)
-session = Session()
 
 
 @db.message_handler(commands=['start'])
