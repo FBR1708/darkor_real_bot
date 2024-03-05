@@ -1,7 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ContentTypes
-from aiogram.utils.exceptions import MessageToDeleteNotFound, BadRequest
+from aiogram.utils.exceptions import MessageToDeleteNotFound
 
 from Token import db, bot
 from english.keyboard_eng import services_type_eng, inline_keyboard_eng
@@ -65,7 +65,6 @@ from uzb.user_info_uzb import services_start, user_info_start, user_name, user_y
     advertisement_employee_request, advertisement_employee_vocation, advertisement_employee_phone_number, \
     advertisement_employee_phone_number1, advertisement_employee_comment, back_func, \
     send_channel_advertisement_employee, send_admin_advertisement_employer, send_admin_advertisement_employee
-
 
 
 @db.message_handler(commands=['start'])

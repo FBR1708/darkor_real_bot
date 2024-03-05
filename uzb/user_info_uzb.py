@@ -631,7 +631,8 @@ async def send_admin_advertisement_employer():
 
 
 async def send_channel_advertisement_employer():
-    group_chat_id = -1002101580581
+    # group_chat_id = -1002101580581
+    group_chat_id = -1001572125885
     image = 'images/darkor.png'
     with open(image, 'rb') as photo:
         photo_content = photo.read()
@@ -861,11 +862,13 @@ async def send_admin_advertisement_employee():
 
 
 async def send_channel_advertisement_employee():
-    group_chat_id = -1002101580581
+    # group_chat_id = -1002101580581
+    group_chat_id = -1001572125885
     image = 'images/darkor.png'
     with open(image, 'rb') as photo:
         photo_content = photo.read()
         await bot.send_photo(chat_id=group_chat_id, photo=photo_content,
                              caption=advertisement_employee_full_information)
 
+# 1572125885
 # '=========================================================================================================='

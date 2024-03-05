@@ -618,7 +618,8 @@ async def send_admin_advertisement_employer_rus():
 
 
 async def send_channel_advertisement_employer_rus():
-    group_chat_id = -1002101580581
+    # group_chat_id = -1002101580581
+    group_chat_id = -1001572125885
     image = 'images/darkor.png'
     with open(image, 'rb') as photo:
         photo_content = photo.read()
@@ -847,7 +848,8 @@ async def send_admin_advertisement_employee_rus():
 
 
 async def send_channel_advertisement_employee_rus():
-    group_chat_id = -1002101580581
+    # group_chat_id = -1002101580581
+    group_chat_id = -1001572125885
     image = 'images/darkor.png'
     with open(image, 'rb') as photo:
         photo_content = photo.read()
