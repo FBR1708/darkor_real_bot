@@ -651,8 +651,6 @@ async def advertisement_employee_start_rus(message: types.Message):
     await Advertisement_Emloyee_Info_State_Rus.employee_specialty.set()
 
 
-
-
 async def advertisement_employee_specialty_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employee_specialty'] = message.text
@@ -742,7 +740,7 @@ async def advertisement_employee_lang_know_rus(message: types.Message, state: FS
             await message.answer(text='Ошибка. Выберите уровень языка.')
         elif len(data['employee_language_level']) == len(data['employee_language_list']):
             await state.set_state(Advertisement_Emloyee_Info_State_Rus.employee_info)
-            await message.answer(text='Информация')
+            await message.answer(text='Информация', reply_markup=user_info_button_rus)
         elif len(data['employee_language_level']) != len(data['employee_language_list']):
             await message.answer(text='Также выберите свой уровень на других языках.')
     elif message.text not in language_buttons:
@@ -770,15 +768,14 @@ async def advertisement_employee_lang_level_rus(message: types.Message, state: F
 
 
 async def advertisement_employee_info_rus(message: types.Message, state: FSMContext):
-    async with state.proxy() as data:
-        data['employee_info'] = message.text
-    await Advertisement_Emloyee_Info_State_Rus.next()
-    await message.answer(text='Тип работы: онлайн оффлайн и т.д....')
-
-
-
-
-
+    user_level = ['PhD', 'Магистр', 'Холостяк', 'Студент', 'Средний специальный']
+    if message.text in user_level:
+        async with state.proxy() as data:
+            data['employee_info'] = message.text
+        await Advertisement_Emloyee_Info_State_Rus.next()
+        await message.answer(text='Тип работы: онлайн оффлайн и т.д....')
+    else:
+        await message.answer(text='Ошибка. Войдите, используя кнопку ниже')
 
 
 async def advertisement_employee_request_rus(message: types.Message, state: FSMContext):
