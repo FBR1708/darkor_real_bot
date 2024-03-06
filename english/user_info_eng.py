@@ -747,7 +747,8 @@ async def employee_lang_know_eng1(message: types.Message, state: FSMContext):
             await message.answer(text='Error.Select your language level')
         elif len(data['employee_language_level']) == len(data['employee_language_list']):
             await state.set_state(Advertisement_Emloyee_Info_State_Eng.employee_info)
-            await message.answer(text='The area you are looking for work')
+            await message.answer(text='Enter your level education using the button below',
+                                 reply_markup=user_info_button_eng)
         elif len(data['employee_language_level']) != len(data['employee_language_list']):
             await message.answer(text='Choose your level in other languages as well.')
     elif message.text not in language_buttons:
@@ -775,10 +776,14 @@ async def employee_lang_level_eng1(message: types.Message, state: FSMContext):
 
 
 async def advertisement_employee_info_eng(message: types.Message, state: FSMContext):
-    async with state.proxy() as data:
-        data['employee_info'] = message.text
-    await Advertisement_Emloyee_Info_State_Eng.next()
-    await message.answer(text='Type of work\nExample : online / offline')
+    user_level = ['PhD', 'Magistr', 'Bachelor', 'Medium special', 'Student']
+    if message.text in user_level:
+        async with state.proxy() as data:
+            data['employee_info'] = message.text
+        await Advertisement_Emloyee_Info_State_Eng.next()
+        await message.answer(text='Type of work\nExample : online / offline')
+    else:
+        await message.answer(text='Error. Enter using the button below')
 
 
 async def advertisement_employee_request_eng(message: types.Message, state: FSMContext):
