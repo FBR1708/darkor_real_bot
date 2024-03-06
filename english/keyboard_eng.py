@@ -44,6 +44,10 @@ inline_keyboard_eng = InlineKeyboardMarkup(
                                                'andidates?keyword=&address=&p'
                                                'osition=&typeOfWork=&experience=&page=1')]])
 
+inline_keyboard1_eng = InlineKeyboardMarkup(
+    inline_keyboard=[[InlineKeyboardButton(text="Link",
+                                           url='https://www.darkor22.uz/uz/all-vacancies?keyword=&address=&position=&typeOfWork=&experience=&page=1')]])
+
 user_info_button_eng = ReplyKeyboardMarkup(resize_keyboard=True,
                                            keyboard=[[KeyboardButton(text='PhD'), KeyboardButton(text='Magistr')],
                                                      [KeyboardButton(text='Bachelor'), KeyboardButton(text='Student')],

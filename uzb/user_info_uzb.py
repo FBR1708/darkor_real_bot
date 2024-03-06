@@ -377,7 +377,7 @@ class Employer_Info_State(StatesGroup):
 async def employer_info_start_func(message: types.Message):
     global service_type
     service_type = message.text
-    await message.answer(text='Kompaniya to\'liq ismi  va faoliyatini kiriting.')
+    await message.answer(text='Kompaniya to\'liq nomi  va faoliyatini kiriting.')
     await Employer_Info_State.company_name.set()
 
 

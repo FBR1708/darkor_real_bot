@@ -10,8 +10,7 @@ from rus.keyboard_rus import services_type_rus1, services_type_rus, phone_num_ru
     uzb_know_level_but_rus, yes_no_but_rus, approval_but_rus, advertisement_but_rus, language_level_button_rus, \
     confirmation_admin_rus, rus_know_level_but_rus
 from total_keyboard import language
-from uzb.keyboard_uz import rus_know_level_but, \
-    english_know_level_but, \
+from uzb.keyboard_uz import english_know_level_but, \
     korea_know_level_but, china_know_level_but
 
 
@@ -65,7 +64,7 @@ service_type = None
 async def user_info_start_rus(message: types.Message):
     global service_type
     service_type = message.text
-    new_text = 'Фамилия Имя Введите имя отца:\n М-н: Абдурахманов Санжар Эльёрбек сын'
+    new_text = 'Фамилия Имя:'
     await message.answer(text=new_text)
     await UserInfoRus.name.set()
 
@@ -74,7 +73,7 @@ async def user_name_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['name'] = message.text
     await UserInfoRus.next()
-    await message.answer(text='Введите год вашего рождения')
+    await message.answer(text='Год рождения:')
 
 
 async def user_year_rus(message: types.Message, state: FSMContext):
@@ -90,7 +89,7 @@ async def user_phone_number_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['phone_number'] = message.contact.phone_number
     await UserInfoRus.next()
-    await message.answer(text='Экспертиза')
+    await message.answer(text='Специальность:')
 
 
 async def user_phone_number1_rus(message: types.Message, state: FSMContext):
@@ -102,14 +101,14 @@ async def user_phone_number1_rus(message: types.Message, state: FSMContext):
             await message.answer("Вы ввели номер телефона в неправильном формате. Пожалуйста, войдите еще раз.")
             return
     await UserInfoRus.next()
-    await message.answer('Экспертиза')
+    await message.answer('Специальность:')
 
 
 async def user_specialty_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['specialty'] = message.text
     await UserInfoRus.next()
-    await message.answer(text='Введите свои данные, используя кнопку ниже', reply_markup=user_info_button_rus)
+    await message.answer(text='Информация, используя кнопку ниже:', reply_markup=user_info_button_rus)
 
 
 async def user_info_rus(message: types.Message, state: FSMContext):
@@ -118,7 +117,7 @@ async def user_info_rus(message: types.Message, state: FSMContext):
         async with state.proxy() as data:
             data['info'] = message.text
         await UserInfoRus.next()
-        await message.answer(text='Введите свой опыт работы')
+        await message.answer(text='Опыт работы:')
     else:
         await message.answer(text='Ошибка. Войдите, используя кнопку ниже')
 
@@ -127,7 +126,7 @@ async def user_experience_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['experience'] = message.text
     await UserInfoRus.next()
-    await message.answer(text='Введите язык, используя кнопку ниже', reply_markup=language_level_button_rus)
+    await message.answer(text='Языковые навыки, используя кнопку ниже', reply_markup=language_level_button_rus)
 
 
 selected_languages_keyboard = None
@@ -207,7 +206,7 @@ async def user_lang_know_rus(message: types.Message, state: FSMContext):
             await message.answer(text='Ошибка. Выберите уровень языка.')
         elif len(data['language_level']) == len(data['know_language_list']):
             await state.set_state(UserInfoRus.address)
-            await message.answer(text='Область, в которой вы ищете работу')
+            await message.answer(text='Район, в котором вы ищете работу')
         elif len(data['language_level']) != len(data['know_language_list']):
             await message.answer(text='Выберите свой уровень на выбранных вами языках.')
     elif message.text not in language_buttons:
@@ -281,14 +280,14 @@ async def user_address_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['address'] = message.text
     await UserInfoRus.next()
-    await message.answer(text='Объяснение')
+    await message.answer(text='Дополнительная информация')
 
 
 async def user_comment_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['comment'] = message.text
     await UserInfoRus.next()
-    await message.answer(text='Введите свою фотографию. Изображение должно быть на белом фоне.')
+    await message.answer(text='Введите свою картина. Картина должно быть на белом фоне.')
 
 
 employee_full_information = None
@@ -374,7 +373,7 @@ class Employer_Info_State_Rus(StatesGroup):
 async def employer_info_start_func_rus(message: types.Message):
     global service_type
     service_type = message.text
-    await message.answer(text='Введите полное название и вид деятельности компании.')
+    await message.answer(text='Полное название и вид деятельности компании.')
     await Employer_Info_State_Rus.company_name.set()
 
 
@@ -382,7 +381,7 @@ async def employer_company_name_func_rus(message: types.Message, state: FSMConte
     async with state.proxy() as data:
         data['company_name'] = message.text
     await Employer_Info_State_Rus.next()
-    await message.answer(text='Введите имя и фамилию ответственного сотрудника')
+    await message.answer(text='Имя и фамилия ответственного сотрудника')
 
 
 async def responsible_user_name_func_rus(message: types.Message, state: FSMContext):
@@ -398,7 +397,7 @@ async def employer_phone_number_func_rus(message: types.Message, state: FSMConte
     async with state.proxy() as data:
         data['phone_number'] = message.contact.phone_number
     await Employer_Info_State_Rus.next()
-    await message.answer(text='Важный сотрудник')
+    await message.answer(text='Требуемый сотрудник(а)')
 
 
 async def employer_phone_number1_func_rus(message: types.Message, state: FSMContext):
@@ -410,35 +409,35 @@ async def employer_phone_number1_func_rus(message: types.Message, state: FSMCont
             await message.answer("Вы ввели номер телефона в неправильном формате. Пожалуйста, войдите еще раз.")
             return
     await Employer_Info_State_Rus.next()
-    await message.answer('Важный сотрудник')
+    await message.answer('Требуемый сотрудник(а)')
 
 
 async def employer_direct_func_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employer_direct'] = message.text
     await Employer_Info_State_Rus.next()
-    await message.answer(text='Введите необходимое количество сотрудников')
+    await message.answer(text='Требуемое количество сотрудников')
 
 
 async def employer_number_func_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employer_number'] = message.text
     await Employer_Info_State_Rus.next()
-    await message.answer(text='Введите обязанности сотрудника')
+    await message.answer(text='Обязанность работника')
 
 
 async def employer_duty_func_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employer_duty'] = message.text
     await Employer_Info_State_Rus.next()
-    await message.answer(text='Введите часы работы')
+    await message.answer(text='Рабочее время')
 
 
 async def work_time_func_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['work_time'] = message.text
     await Employer_Info_State_Rus.next()
-    await message.answer(text='Введите необходимый опыт работы')
+    await message.answer(text='Требуемый опыт работы')
 
 
 async def employer_experience_func_rus(message: types.Message, state: FSMContext):
@@ -452,7 +451,7 @@ async def employer_salary_func_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employer_salary'] = message.text
     await Employer_Info_State_Rus.next()
-    await message.answer(text='Введите свой рабочий адрес')
+    await message.answer(text='Адрес рабочего места')
 
 
 employer_full_information = None
@@ -511,7 +510,7 @@ async def advertisement_start_rus(message: types.Message):
 async def advertisement_employer_start_rus(message: types.Message):
     global service_type
     service_type = message.text
-    await message.answer(text='Важный сотрудник')
+    await message.answer(text='Хороший сотрудник:')
     await Advertisement_Emloyer_Info_State_Rus.staff_direct.set()
 
 
@@ -519,42 +518,42 @@ async def advertisement_employer_staff_rus(message: types.Message, state: FSMCon
     async with state.proxy() as data:
         data['staff_direct'] = message.text
     await Advertisement_Emloyer_Info_State_Rus.next()
-    await message.answer(text='Количество работников')
+    await message.answer(text='Количество работников:')
 
 
 async def advertisement_employer_staff_count_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['staff_count'] = message.text
     await Advertisement_Emloyer_Info_State_Rus.next()
-    await message.answer(text='Введите название организации')
+    await message.answer(text='Организация:')
 
 
 async def advertisement_employer_company_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['company_name'] = message.text
     await Advertisement_Emloyer_Info_State_Rus.next()
-    await message.answer(text='Введите зарплату')
+    await message.answer(text='Зарплата:')
 
 
 async def advertisement_employer_salary_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['salary'] = message.text
     await Advertisement_Emloyer_Info_State_Rus.next()
-    await message.answer(text='Введите адрес')
+    await message.answer(text='Адрес:')
 
 
 async def advertisement_employer_vocation_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['work_vocation'] = message.text
     await Advertisement_Emloyer_Info_State_Rus.next()
-    await message.answer(text='Сделай предложение')
+    await message.answer(text='Предложения:')
 
 
 async def advertisement_employer_suggestion_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employer_suggestion'] = message.text
     await Advertisement_Emloyer_Info_State_Rus.next()
-    await message.answer(text='Введите требования')
+    await message.answer(text='Требования')
 
 
 async def advertisement_employer_request_rus(message: types.Message, state: FSMContext):
@@ -570,7 +569,7 @@ async def advertisement_employer_phone_number_rus(message: types.Message, state:
     async with state.proxy() as data:
         data['employer_phone_number'] = message.contact.phone_number
     await Advertisement_Emloyer_Info_State_Rus.next()
-    await message.answer(text='Введите комментарий')
+    await message.answer(text='Объяснение')
 
 
 async def advertisement_employer_phone_number1_rus(message: types.Message, state: FSMContext):
@@ -582,7 +581,7 @@ async def advertisement_employer_phone_number1_rus(message: types.Message, state
             await message.answer("Вы ввели номер телефона в неправильном формате. Пожалуйста, войдите еще раз.")
             return
     await Advertisement_Emloyer_Info_State_Rus.next()
-    await message.answer('Введите комментарий')
+    await message.answer('Объяснение')
 
 
 advertisement_employer_full_information = None
@@ -648,22 +647,24 @@ class Advertisement_Emloyee_Info_State_Rus(StatesGroup):
 async def advertisement_employee_start_rus(message: types.Message):
     global service_type
     service_type = message.text
-    await message.answer(text='Введите свою специальность')
+    await message.answer(text='Специальность')
     await Advertisement_Emloyee_Info_State_Rus.employee_specialty.set()
+
+
 
 
 async def advertisement_employee_specialty_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employee_specialty'] = message.text
     await Advertisement_Emloyee_Info_State_Rus.next()
-    await message.answer(text='Введите свой опыт')
+    await message.answer(text='Опыт')
 
 
 async def advertisement_employee_experience_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employee_experience'] = message.text
     await Advertisement_Emloyee_Info_State_Rus.next()
-    await message.answer(text='Введите свой уровень языка', reply_markup=language_level_button_rus)
+    await message.answer(text='Владение языком', reply_markup=language_level_button_rus)
 
 
 async def advertisement_employee_lang_list_rus(message: types.Message, state: FSMContext):
@@ -741,7 +742,7 @@ async def advertisement_employee_lang_know_rus(message: types.Message, state: FS
             await message.answer(text='Ошибка. Выберите уровень языка.')
         elif len(data['employee_language_level']) == len(data['employee_language_list']):
             await state.set_state(Advertisement_Emloyee_Info_State_Rus.employee_info)
-            await message.answer(text='Область, в которой вы ищете работу')
+            await message.answer(text='Информация')
         elif len(data['employee_language_level']) != len(data['employee_language_list']):
             await message.answer(text='Также выберите свой уровень на других языках.')
     elif message.text not in language_buttons:
@@ -772,14 +773,19 @@ async def advertisement_employee_info_rus(message: types.Message, state: FSMCont
     async with state.proxy() as data:
         data['employee_info'] = message.text
     await Advertisement_Emloyee_Info_State_Rus.next()
-    await message.answer(text='Тип работы\nНапример : онлайн/оффлайн')
+    await message.answer(text='Тип работы: онлайн оффлайн и т.д....')
+
+
+
+
+
 
 
 async def advertisement_employee_request_rus(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['employee_request'] = message.text
     await Advertisement_Emloyee_Info_State_Rus.next()
-    await message.answer(text='Введите адрес')
+    await message.answer(text='Адрес')
 
 
 async def advertisement_employee_vocation_rus(message: types.Message, state: FSMContext):
@@ -795,7 +801,7 @@ async def advertisement_employee_phone_number_rus(message: types.Message, state:
     async with state.proxy() as data:
         data['employee_phone_number'] = message.contact.phone_number
     await Advertisement_Emloyee_Info_State_Rus.next()
-    await message.answer(text='Введите комментарий')
+    await message.answer(text='Примечание:')
 
 
 async def advertisement_employee_phone_number1_rus(message: types.Message, state: FSMContext):
@@ -807,7 +813,7 @@ async def advertisement_employee_phone_number1_rus(message: types.Message, state
             await message.answer("Вы ввели номер телефона в неправильном формате. Пожалуйста, войдите еще раз.")
             return
     await Advertisement_Emloyee_Info_State_Rus.next()
-    await message.answer('Введите комментарий')
+    await message.answer('Примечание:')
 
 
 advertisement_employee_full_information = None

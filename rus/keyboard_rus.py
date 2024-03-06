@@ -4,12 +4,12 @@ services_type_rus = ReplyKeyboardMarkup(resize_keyboard=True,
                                         keyboard=[
                                             [KeyboardButton(text='Найти работу'),
                                              KeyboardButton(text='Найти сотрудника')],
-                                            [KeyboardButton(text='Разместить объявление'),
+                                            [KeyboardButton(text='Разместить рекламу'),
                                              KeyboardButton(text='⬅Назад')]])
 
 services_type_rus1 = ReplyKeyboardMarkup(resize_keyboard=True,
-                                         keyboard=[[KeyboardButton(text='Посмотреть список открытых сотрудников')],
-                                                   [KeyboardButton(text='Использование HR-сервиса')],
+                                         keyboard=[[KeyboardButton(text='Просмотрите открытую базу данных работников')],
+                                                   [KeyboardButton(text='Использование кадровой службы')],
                                                    [KeyboardButton(text='🔚Назад')]])
 
 phone_num_rus = ReplyKeyboardMarkup(resize_keyboard=True,
@@ -37,7 +37,7 @@ approval_but_rus = ReplyKeyboardMarkup(resize_keyboard=True,
 
 advertisement_but_rus = ReplyKeyboardMarkup(resize_keyboard=True,
                                             keyboard=[[KeyboardButton(text='Работодатель')],
-                                                      [KeyboardButton(text='Сотрудник')],
+                                                      [KeyboardButton(text='Pабочий')],
                                                       [KeyboardButton(text='🔚Назад')]])
 
 inline_keyboard_rus = InlineKeyboardMarkup(
@@ -45,6 +45,10 @@ inline_keyboard_rus = InlineKeyboardMarkup(
                                            url='https://www.darkor22.uz/uz/all-c'
                                                'andidates?keyword=&address=&p'
                                                'osition=&typeOfWork=&experience=&page=1')]])
+
+inline_keyboard1_rus = InlineKeyboardMarkup(
+    inline_keyboard=[[InlineKeyboardButton(text="Ссылкa",
+                                           url='https://www.darkor22.uz/uz/all-vacancies?keyword=&address=&position=&typeOfWork=&experience=&page=1')]])
 
 user_info_button_rus = ReplyKeyboardMarkup(resize_keyboard=True,
                                            keyboard=[[KeyboardButton(text='PhD'), KeyboardButton(text='Магистр')],
@@ -60,7 +64,6 @@ language_level_button_rus = ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
 rus_know_level_but_rus = ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
     [KeyboardButton(text='Я не знаю'), KeyboardButton(text='Удовлетворительно')],
     [KeyboardButton(text='Хороший'), KeyboardButton(text='Отличный')]])
-
 
 uzb_know_level_but_rus = ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
     [KeyboardButton(text='Я не знаю'), KeyboardButton(text='Удовлетворительно')],

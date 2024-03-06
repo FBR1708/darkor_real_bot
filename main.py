@@ -4,7 +4,7 @@ from aiogram.types import ContentTypes
 from aiogram.utils.exceptions import MessageToDeleteNotFound
 
 from Token import db, bot
-from english.keyboard_eng import services_type_eng, inline_keyboard_eng
+from english.keyboard_eng import services_type_eng, inline_keyboard_eng, inline_keyboard1_eng
 from english.user_info_eng import services_start_eng, advertisement_start_eng, send_admin_advertisement_employee_eng, \
     send_admin_advertisement_employer_eng, send_admin_employee_eng, send_admin_HR_employer_eng, \
     send_channel_advertisement_employee_eng, send_channel_advertisement_employer_eng, back_func_eng, \
@@ -25,7 +25,7 @@ from english.user_info_eng import services_start_eng, advertisement_start_eng, s
     advertisement_employee_comment_eng, \
     employer_number_func_eng, employee_lang_level_eng1, employee_lang_list_eng1, employee_lang_know_eng1, \
     advertisement_employer_staff_count_eng
-from rus.keyboard_rus import services_type_rus, inline_keyboard_rus
+from rus.keyboard_rus import services_type_rus, inline_keyboard_rus, inline_keyboard1_rus
 from rus.user_info_rus import send_admin_advertisement_employee_rus, send_admin_advertisement_employer_rus, \
     send_admin_employee_rus, send_admin_HR_employer_rus, back_func_rus, services_start_rus, user_info_start_rus, \
     UserInfoRus, user_name_rus, user_year_rus, user_phone_number_rus, user_phone_number1_rus, user_specialty_rus, \
@@ -47,7 +47,7 @@ from rus.user_info_rus import send_admin_advertisement_employee_rus, send_admin_
     send_channel_advertisement_employee_rus, send_channel_advertisement_employer_rus, \
     advertisement_employee_lang_level_rus, advertisement_employer_staff_count_rus
 from total_keyboard import language
-from uzb.keyboard_uz import services_type_uz, inline_keyboard
+from uzb.keyboard_uz import services_type_uz, inline_keyboard, inline_keyboard1
 from uzb.user_info_uzb import send_admin_employee, send_admin_HR_employer, send_channel_advertisement_employer, \
     user_lang_know, user_certificate, certificate_image, user_lang_list, UserInfoUzb, user_lang_list1, \
     user_lang_know1, advertisement_employee_lang_level, advertisement_employer_staff_count
@@ -93,7 +93,7 @@ async def handle_message(message: types.Message):
 
 
 @db.message_handler(lambda message: message.text == 'Tasdiqlash')
-async def handle_message(message: types.Message, state: FSMContext):
+async def handle_message(message: types.Message, ):
     if services == 'Ishchi':
         await send_admin_advertisement_employee()
         await bot.send_message(chat_id=message.chat.id,
@@ -105,7 +105,9 @@ async def handle_message(message: types.Message, state: FSMContext):
     elif services == 'Ish Topish':
         await send_admin_employee()
         await bot.send_message(chat_id=message.chat.id,
-                               text='Ma\'lumotlaringiz qabul qilindi.')
+                               text='Ma\'lumotlaringiz qabul qilindi.'
+                               )
+        await bot.send_message(chat_id=message.chat.id, text='Havola orqali kiring.', reply_markup=inline_keyboard1)
     elif services == 'HR xizmatidan foydalanish':
         await send_admin_HR_employer()
         await bot.send_message(chat_id=message.chat.id,
@@ -478,6 +480,8 @@ async def handle_message(message: types.Message):
         await send_admin_employee_eng()
         await bot.send_message(chat_id=message.chat.id,
                                text='Your information has been received.')
+        await bot.send_message(chat_id=message.chat.id, text='Enter through the link.',
+                               reply_markup=inline_keyboard1_eng)
     elif services == 'Use of HR service':
         await send_admin_HR_employer_eng()
         await bot.send_message(chat_id=message.chat.id,
@@ -826,10 +830,12 @@ async def handle_message(message: types.Message):
         await send_admin_employee_rus()
         await bot.send_message(chat_id=message.chat.id,
                                text='Ваша информация получена.')
-    elif services == 'Использование HR-сервиса':
+        await bot.send_message(chat_id=message.chat.id, text='Войдите по ссылке.',
+                               reply_markup=inline_keyboard1_rus)
+    elif services == 'Использование кадровой службы':
         await send_admin_HR_employer_rus()
         await bot.send_message(chat_id=message.chat.id,
-                               text='Ваша информация получена.')
+                               text='Ваша информация получена.\nИнформация отправляется администраторам и они звонят')
 
 
 @db.message_handler(lambda message: message.text in ['🔚Назад', '⬅Назад', 'Отмена'])
@@ -847,12 +853,12 @@ async def handle_message(message: types.Message):
     await services_start_rus(message)
 
 
-@db.message_handler(lambda message: message.text == 'Посмотреть список открытых сотрудников')
+@db.message_handler(lambda message: message.text == 'Просмотрите открытую базу работников')
 async def handle_message(message: types.Message):
     await message.answer(text='Перейти на сайт', reply_markup=inline_keyboard_rus)
 
 
-@db.message_handler(lambda message: message.text == 'Разместить объявление')
+@db.message_handler(lambda message: message.text == 'Разместить рекламу')
 async def handle_message(message: types.Message):
     await advertisement_start_rus(message)
 
@@ -981,7 +987,7 @@ async def handle_message(message: types.Message, state: FSMContext):
 ''' Use of HR service '''
 
 
-@db.message_handler(lambda message: message.text == 'Использование HR-сервиса')
+@db.message_handler(lambda message: message.text == 'Использование кадровой службы')
 async def handle_message(message: types.Message):
     global services
     services = message.text
@@ -1112,7 +1118,7 @@ async def handle_message(message: types.Message, state: FSMContext):
 ''' Elon joylash qismining Ishchi  to'ldiradigan qismi rus '''
 
 
-@db.message_handler(lambda message: message.text == 'Сотрудник')
+@db.message_handler(lambda message: message.text == 'Pабочий')
 async def handle_message(message: types.Message):
     global services
     services = message.text
