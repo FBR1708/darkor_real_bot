@@ -93,7 +93,7 @@ async def handle_message(message: types.Message):
 
 
 @db.message_handler(lambda message: message.text == 'Tasdiqlash')
-async def handle_message(message: types.Message, ):
+async def handle_message(message: types.Message):
     if services == 'Ishchi':
         await send_admin_advertisement_employee()
         await bot.send_message(chat_id=message.chat.id,
