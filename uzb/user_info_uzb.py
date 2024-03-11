@@ -296,10 +296,11 @@ async def user_comment(message: types.Message, state: FSMContext):
 employee_full_information = None
 photo_id = None
 user_full_information = None
+pictures_list = []
 
 
 async def user_image(message: types.Message, state: FSMContext):
-    global photo_id, user_full_information, downloaded_file, images_list
+    global photo_id, user_full_information, downloaded_file, pictures_list
     photo_id = message.photo[-1].file_id
     async with state.proxy() as data:
         data['image'] = photo_id
@@ -325,9 +326,9 @@ async def user_image(message: types.Message, state: FSMContext):
     certificate_picture = data.get('certificate_image')
     if certificate_yes_no.lower() == 'bor' or certificate_yes_no.lower() == 'yo\'q':
         if certificate_picture:
-            images_list = []
+            # pictures_list = []
             for i in data['certificate_image']:
-                images_list.append(i)
+                pictures_list.append(i)
                 await bot.send_photo(chat_id=message.chat.id, photo=i)
             await bot.send_message(chat_id=message.chat.id,
                                    text='Ma\'lumotlaringizni tekshiring va pastdagi tugma orqali tasdiqlang.',
@@ -349,8 +350,8 @@ async def send_admin_employee():
     photo_content = downloaded_file.read()
     await bot.send_photo(chat_id=group_chat_id, photo=photo_content,
                          caption=employee_full_information)
-    if images_list:
-        for j in images_list:
+    if pictures_list:
+        for j in pictures_list:
             await bot.send_message(chat_id=group_chat_id, text='Sertifikat rasmi')
             await bot.send_photo(chat_id=group_chat_id, photo=j)
     else:

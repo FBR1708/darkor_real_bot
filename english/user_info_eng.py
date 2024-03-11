@@ -292,7 +292,7 @@ async def user_comment_eng(message: types.Message, state: FSMContext):
 
 
 employee_full_information = None
-
+images_list = []
 
 async def user_image_eng(message: types.Message, state: FSMContext):
     global photo_id, user_full_information, downloaded_file, images_list
@@ -321,7 +321,7 @@ async def user_image_eng(message: types.Message, state: FSMContext):
     certificate_picture = data.get('certificate_image')
     if certificate_yes_no.lower() == 'yes' or certificate_yes_no.lower() == 'no':
         if certificate_picture:
-            images_list = []
+            # images_list = []
             for i in data['certificate_image']:
                 images_list.append(i)
                 await bot.send_photo(chat_id=message.chat.id, photo=i)
