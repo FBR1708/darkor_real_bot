@@ -66,6 +66,8 @@ from uzb.user_info_uzb import services_start, user_info_start, user_name, user_y
     advertisement_employee_phone_number1, advertisement_employee_comment, back_func, \
     send_channel_advertisement_employee, send_admin_advertisement_employer, send_admin_advertisement_employee
 
+p = 10
+
 
 @db.message_handler(commands=['start'])
 async def start(message: types.Message):
