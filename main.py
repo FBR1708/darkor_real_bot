@@ -820,18 +820,15 @@ async def handle_message(message: types.Message, state: FSMContext):
 
 @db.message_handler(lambda message: message.text == 'Подтверждение')
 async def handle_message(message: types.Message):
-    if services == 'Сотрудник':
+    if services == 'Pабочий':
         await send_admin_advertisement_employee_rus()
-        await bot.send_message(chat_id=message.chat.id,
-                               text='Ваша информация получена.')
+        await bot.send_message(chat_id=message.chat.id, text='Ваша информация получена.')
     elif services == 'Работодатель':
         await send_admin_advertisement_employer_rus()
-        await bot.send_message(chat_id=message.chat.id,
-                               text='Ваша информация получена.')
+        await bot.send_message(chat_id=message.chat.id, text='Ваша информация получена.')
     elif services == 'Найти работу':
         await send_admin_employee_rus()
-        await bot.send_message(chat_id=message.chat.id,
-                               text='Ваша информация получена.')
+        await bot.send_message(chat_id=message.chat.id, text='Ваша информация получена.')
         await bot.send_message(chat_id=message.chat.id, text='Войдите по ссылке.',
                                reply_markup=inline_keyboard1_rus)
     elif services == 'Использование кадровой службы':

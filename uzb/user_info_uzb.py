@@ -871,5 +871,5 @@ async def send_channel_advertisement_employee():
         await bot.send_photo(chat_id=group_chat_id, photo=photo_content,
                              caption=advertisement_employee_full_information)
 
-# 1572125885
+
 # '=========================================================================================================='
