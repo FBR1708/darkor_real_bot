@@ -768,7 +768,7 @@ async def advertisement_employee_lang_level_rus(message: types.Message, state: F
 
 
 async def advertisement_employee_info_rus(message: types.Message, state: FSMContext):
-    user_level = ['PhD', 'Магистр', 'Холостяк', 'Студент', 'Средний специальный']
+    user_level = ['PhD', 'Магистр', 'Бакалавр', 'Студент', 'Средний специальный']
     if message.text in user_level:
         async with state.proxy() as data:
             data['employee_info'] = message.text
