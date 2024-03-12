@@ -52,7 +52,7 @@ inline_keyboard1_rus = InlineKeyboardMarkup(
 
 user_info_button_rus = ReplyKeyboardMarkup(resize_keyboard=True,
                                            keyboard=[[KeyboardButton(text='PhD'), KeyboardButton(text='Магистр')],
-                                                     [KeyboardButton(text='Холостяк'), KeyboardButton(text='Студент')],
+                                                     [KeyboardButton(text='Бакалавр'), KeyboardButton(text='Студент')],
                                                      [KeyboardButton(text='Средний специальный')]])
 
 language_level_button_rus = ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[

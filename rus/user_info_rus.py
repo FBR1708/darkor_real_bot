@@ -112,7 +112,7 @@ async def user_specialty_rus(message: types.Message, state: FSMContext):
 
 
 async def user_info_rus(message: types.Message, state: FSMContext):
-    user_level = ['PhD', 'Магистр', 'Холостяк', 'Студент', 'Средний специальный']
+    user_level = ['PhD', 'Магистр', 'Бакалавр', 'Студент', 'Средний специальный']
     if message.text in user_level:
         async with state.proxy() as data:
             data['info'] = message.text
